@@ -1,14 +1,6 @@
 import React from "react";
-import { ArrowRight, Code, Cpu, Zap } from "lucide-react";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Projects = () => {
   return (
@@ -18,10 +10,10 @@ const Projects = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
-              Our <span className="text-purple-600">Projects</span>
+              PiLab <span className="text-purple-600">Projects</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Empowering innovation through cutting-edge technology solutions
+              Explore fascinating projects based on the concept of Pi
             </p>
             <div className="flex space-x-4 justify-center">
               <a
@@ -53,29 +45,67 @@ const Projects = () => {
         </div>
       </section>
 
-      {/*  Projects Highlights */}
+      {/*  PiLab Projects Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white" id="projects">
-        <aside>
-          <h1>Sofware</h1>
-          <h1>AI</h1>
-          <h1>Robotics</h1>
-       </aside>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Pi Calculator */}
+            <div className="bg-purple-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold mb-4">Pi Calculator</h3>
+              <p className="text-gray-700 mb-4">
+                A tool for calculating Pi to hundreds or even thousands of
+                decimal places. Explore how algorithms like Monte Carlo,
+                Gauss-Legendre, and others help compute Pi.
+              </p>
+              <a href="#" className="text-purple-600 hover:underline">
+                Try Pi Calculator
+              </a>
+            </div>
+
+            {/* Pi Memorization Tool */}
+            <div className="bg-purple-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold mb-4">Pi Memorization Tool</h3>
+              <p className="text-gray-700 mb-4">
+                Challenge yourself to memorize the digits of Pi! Track your
+                progress and see how many digits you can remember.
+              </p>
+              <a href="#" className="text-purple-600 hover:underline">
+                Start Memorizing Pi
+              </a>
+            </div>
+
+            {/* Visual Demonstrations */}
+            <div className="bg-purple-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold mb-4">
+                Visual Demonstrations of Pi
+              </h3>
+              <p className="text-gray-700 mb-4">
+                See how Pi relates to circles, spheres, and geometry with
+                interactive visualizations. Learn how Pi is used in real-world
+                applications, from calculating area to advanced mathematics.
+              </p>
+              <a href="#" className="text-purple-600 hover:underline">
+                Explore Visualizations
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* CTA Section */}
       <section className="bg-purple-700 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-extrabold text-white mb-4">
-            Ready to Innovate?
+            Ready to Learn More About Pi?
           </h2>
           <p className="text-xl text-purple-100 mb-8">
-            Let's collaborate to bring your ideas to life
+            Join the community and contribute your knowledge and skills to PiLab
           </p>
           <a
             href="/contact"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-purple-50 transition duration-300 ease-in-out"
           >
-            Get in Touch
+            Get Involved
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
         </div>
