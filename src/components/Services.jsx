@@ -4,7 +4,7 @@ import { ArrowRight, Code, Cpu, Zap } from "lucide-react";
 const Services = () => {
   return (
     <div className="bg-gradient-to-b from-purple-50 to-white">
-      {/* Hero Section */}
+      {/* Services Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
