@@ -1,9 +1,8 @@
 import React from "react";
 import { Users, Target, Zap, Award } from "lucide-react";
-import imranParthib from "../assets/team/imranParthib.png";
-import anasIslam from "../assets/team/rakibulAnas.jfif";
-import touhidIslam from "../assets/team/towhidulIslam.jpg";
+
 import mission from "/mission.png";
+import Team from "./Team";
 
 const About = () => {
   return (
@@ -12,7 +11,8 @@ const About = () => {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-purple-700 dark:bg-purple-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-            About <span className="text-purple-300 dark:text-purple-400">PiLab</span>
+            About{" "}
+            <span className="text-purple-300 dark:text-purple-400">PiLab</span>
           </h1>
           <p className="text-xl text-purple-100 max-w-3xl mx-auto">
             Pioneering the future of technology through innovation,
@@ -57,25 +57,33 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: <Zap className="h-8 w-8 text-purple-500 dark:text-purple-400" />,
+                icon: (
+                  <Zap className="h-8 w-8 text-purple-500 dark:text-purple-400" />
+                ),
                 title: "Innovation",
                 description:
                   "Constantly pushing the boundaries of what's possible",
               },
               {
-                icon: <Users className="h-8 w-8 text-purple-500 dark:text-purple-400" />,
+                icon: (
+                  <Users className="h-8 w-8 text-purple-500 dark:text-purple-400" />
+                ),
                 title: "Collaboration",
                 description:
                   "Working together to achieve extraordinary results",
               },
               {
-                icon: <Award className="h-8 w-8 text-purple-500 dark:text-purple-400" />,
+                icon: (
+                  <Award className="h-8 w-8 text-purple-500 dark:text-purple-400" />
+                ),
                 title: "Excellence",
                 description:
                   "Striving for the highest quality in everything we do",
               },
               {
-                icon: <Target className="h-8 w-8 text-purple-500 dark:text-purple-400" />,
+                icon: (
+                  <Target className="h-8 w-8 text-purple-500 dark:text-purple-400" />
+                ),
                 title: "Client-Centric",
                 description:
                   "Putting our clients' needs at the heart of our work",
@@ -89,7 +97,9 @@ const About = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 text-center">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-center">{value.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  {value.description}
+                </p>
               </div>
             ))}
           </div>
@@ -97,45 +107,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
-            Meet Our Team
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Imran Parthib",
-                role: "CEO & Founder",
-                image: imranParthib,
-              },
-              { name: "Thouhidul Islam", role: "CTO", image: touhidIslam },
-              {
-                name: "Rakibul Islam Anas",
-                role: "Lead Developer",
-                image: anasIslam,
-              },
-            ].map((member, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{member.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Team />
     </div>
   );
 };

@@ -1,3 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 60px;
+  }
+}
+@keyframes gradient-x {
+  0% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  100% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
