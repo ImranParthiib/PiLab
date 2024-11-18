@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X, Sun, Moon, Loader } from "lucide-react";
 import { auth } from "../../Firebase/firebaseConfig";
@@ -143,7 +143,7 @@ function Header({ user }) {
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="block px-4 py-2 w-full text-left flex items-center space-x-2"
+                        className="block px-4 py-2 w-full text-left   items-center space-x-2 bg-red-400 hover:rounded-b"
                       >
                         {isLoggingOut ? (
                           <Loader className="animate-spin" size={16} />
