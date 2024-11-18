@@ -11,6 +11,7 @@ import BackToTopButton from "./components/BackToTopButton";
 import PiCalculator from "./components/PiCalculator";
 import PiMemorization from "./components/PiMemorization";
 import VisualDemonstrations from "./components/VisualDemonstrations";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/pi-calculator" element={<PiCalculator />} />
           <Route path="/pi-memorization" element={<PiMemorization />} />
           <Route path="/visual-demonstrations" element={<VisualDemonstrations />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <BackToTopButton />
       </main>
