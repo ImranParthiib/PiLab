@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
@@ -9,6 +8,9 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
+import PiCalculator from "./components/PiCalculator";
+import PiMemorization from "./components/PiMemorization";
+import VisualDemonstrations from "./components/VisualDemonstrations";
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/pi-calculator" element={<PiCalculator />} />
+          <Route path="/pi-memorization" element={<PiMemorization />} />
+          <Route path="/visual-demonstrations" element={<VisualDemonstrations />} />
         </Routes>
         <BackToTopButton />
       </main>

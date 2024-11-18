@@ -1,4 +1,3 @@
-import React from "react";
 import { Users, Target, Zap, Award } from "lucide-react";
 
 import mission from "/mission.png";
