@@ -12,11 +12,7 @@ dist
 dist-ssr
 *.local
 .env
-App.jsx
-Header.jsx
-Footer.jsx
-Home.jsx
-About.jsx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
