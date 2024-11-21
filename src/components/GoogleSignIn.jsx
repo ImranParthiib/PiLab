@@ -4,8 +4,8 @@ import { signInWithPopup } from "firebase/auth";
 import { Chrome, Sparkles, Lock } from "lucide-react";
 
 const PiIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
+  <svg
+    viewBox="0 0 24 24"
     className="w-12 h-12"
     fill="none"
     stroke="currentColor"
@@ -65,7 +65,9 @@ const GoogleSignIn = () => {
                 <Lock className="w-4 h-4 text-blue-600" />
                 <p className="text-gray-600 font-medium">Secure Sign-in</p>
               </div>
-              <p className="text-sm text-gray-500">Join our community of innovators</p>
+              <p className="text-sm text-center text-gray-500">
+                Join our community of innovators
+              </p>
             </div>
 
             <button
@@ -82,28 +84,51 @@ const GoogleSignIn = () => {
           {/* Benefits section */}
           <div className="mt-8 grid grid-cols-2 gap-4">
             <div className="bg-blue-50 p-3 rounded-lg text-center">
-              <p className="text-blue-600 font-medium text-sm">Advanced Tools</p>
+              <p className="text-blue-600 font-medium text-sm">
+                Advanced Tools
+              </p>
             </div>
             <div className="bg-purple-50 p-3 rounded-lg text-center">
-              <p className="text-purple-600 font-medium text-sm">Real-time Data</p>
+              <p className="text-purple-600 font-medium text-sm">
+                Real-time Data
+              </p>
             </div>
             <div className="bg-pink-50 p-3 rounded-lg text-center">
-              <p className="text-pink-600 font-medium text-sm">Smart Analytics</p>
+              <p className="text-pink-600 font-medium text-sm">
+                Smart Analytics
+              </p>
             </div>
             <div className="bg-indigo-50 p-3 rounded-lg text-center">
-              <p className="text-indigo-600 font-medium text-sm">Cloud Access</p>
+              <p className="text-indigo-600 font-medium text-sm">Game Tools</p>
             </div>
           </div>
 
           {/* Footer */}
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 mb-2">Protected by enterprise-grade security</p>
+            <p className="text-sm text-gray-500 mb-2">
+              Protected by enterprise-grade security
+            </p>
             <div className="flex justify-center gap-3 text-sm">
-              <a href="#" className="text-blue-600 hover:text-blue-700 underline">Terms</a>
+              <a
+                href="#"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                Terms
+              </a>
               <span className="text-gray-400">•</span>
-              <a href="#" className="text-blue-600 hover:text-blue-700 underline">Privacy</a>
+              <a
+                href="#"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                Privacy
+              </a>
               <span className="text-gray-400">•</span>
-              <a href="#" className="text-blue-600 hover:text-blue-700 underline">Support</a>
+              <a
+                href="#"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                Support
+              </a>
             </div>
           </div>
         </div>
