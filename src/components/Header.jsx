@@ -51,17 +51,18 @@ function Header({ user }) {
   };
 
   return (
-    <header className="bg-gradient-to-r from-purple-800 to-indigo-900 dark:from-gray-800 dark:to-gray-900 text-white py-4 px-4 sm:px-6 shadow-lg">
+    <header className="bg-gradient-to-r from-purple-800 to-indigo-900 dark:from-gray-800 dark:to-gray-900 text-white py-3 px-2 sm:px-4 shadow-lg">
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-between items-center">
           <NavLink to="/" className="flex items-center space-x-2">
-            <img 
-              src="/pilab-logo.png" 
-              alt="PiLab Logo" 
-              className="w-6 h-6 sm:w-8 sm:h-8" 
+            <img
+              src="/pilab-logo.png"
+              alt="PiLab Logo"
+              className="w-6 h-6 sm:w-8 sm:h-8"
             />
             <h1 className="text-xl sm:text-2xl font-extrabold tracking-wider">
-              Pi<span className="text-purple-300 dark:text-purple-400">Lab</span>
+              Pi
+              <span className="text-purple-300 dark:text-purple-400">Lab</span>
             </h1>
           </NavLink>
 
@@ -76,7 +77,11 @@ function Header({ user }) {
                       text-xs sm:text-sm uppercase tracking-wider font-medium
                       text-white hover:text-purple-300 dark:hover:text-purple-400 
                       transition duration-300 ease-in-out
-                      ${isActive ? "border-b-2 border-purple-300 dark:border-purple-400" : ""}
+                      ${
+                        isActive
+                          ? "border-b-2 border-purple-300 dark:border-purple-400"
+                          : ""
+                      }
                     `}
                   >
                     {item.name}
@@ -91,9 +96,58 @@ function Header({ user }) {
             >
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+            {user && (
+              <div className="relative ml-4">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-2 sm:space-x-3 
+                    bg-gradient-to-r from-purple-600 to-indigo-600 
+                    hover:from-purple-700 hover:to-indigo-700 
+                    text-white font-semibold 
+                    py-1.5 px-3 sm:py-1 sm:px-4 
+                    rounded-full transition duration-300 
+                    ease-in-out shadow-lg hover:shadow-xl"
+                >
+                  <span className="text-xs sm:text-sm hidden sm:block truncate max-w-[100px]">
+                    {user.displayName}
+                  </span>
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName}
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white shadow-sm"
+                  />
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg z-50">
+                    <ul>
+                      <li>
+                        <NavLink
+                          to="/dashboard"
+                          className="block px-4 py-2 hover:bg-gray-100 transition"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="block w-full text-left px-4 py-2 hover:bg-red-50 flex items-center space-x-2"
+                        >
+                          {isLoggingOut && (
+                            <Loader className="animate-spin" size={16} />
+                          )}
+                          <span>Logout</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu and User Icons */}
           <div className="md:hidden flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={toggleTheme}
@@ -102,6 +156,55 @@ function Header({ user }) {
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            {user && (
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-2 sm:space-x-3 
+                    bg-gradient-to-r from-purple-600 to-indigo-600 
+                    hover:from-purple-700 hover:to-indigo-700 
+                    text-white font-semibold 
+                    py-1.5 px-3 sm:py-2 sm:px-4 
+                    rounded-full transition duration-300 
+                    ease-in-out shadow-lg hover:shadow-xl"
+                >
+                  <span className="text-xs sm:text-sm hidden sm:block truncate max-w-[100px]">
+                    {user.displayName}
+                  </span>
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName}
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white shadow-sm"
+                  />
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg z-50">
+                    <ul>
+                      <li>
+                        <NavLink
+                          to="/dashboard"
+                          className="block px-4 py-2 hover:bg-gray-100 transition"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="block w-full text-left px-4 py-2 hover:bg-red-50 flex items-center space-x-2"
+                        >
+                          {isLoggingOut && (
+                            <Loader className="animate-spin" size={16} />
+                          )}
+                          <span>Logout</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
             <button
               className="text-white focus:outline-none"
               onClick={toggleMenu}
@@ -110,54 +213,6 @@ function Header({ user }) {
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-
-          {/* User Icon */}
-          {user && (
-            <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="flex items-center space-x-2 sm:space-x-3 
-                  bg-gradient-to-r from-purple-600 to-indigo-600 
-                  hover:from-purple-700 hover:to-indigo-700 
-                  text-white font-semibold 
-                  py-1.5 px-3 sm:py-2 sm:px-4 
-                  rounded-full transition duration-300 
-                  ease-in-out shadow-lg hover:shadow-xl"
-              >
-                <span className="text-xs sm:text-sm hidden sm:block truncate max-w-[100px]">
-                  {user.displayName}
-                </span>
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName}
-                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white shadow-sm"
-                />
-              </button>
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg z-50">
-                  <ul>
-                    <li>
-                      <NavLink 
-                        to="/dashboard" 
-                        className="block px-4 py-2 hover:bg-gray-100 transition"
-                      >
-                        Dashboard
-                      </NavLink>
-                    </li>
-                    <li>
-                      <button
-                        onClick={handleLogout}
-                        className="block w-full text-left px-4 py-2 hover:bg-red-50 flex items-center space-x-2"
-                      >
-                        {isLoggingOut && <Loader className="animate-spin" size={16} />}
-                        <span>Logout</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Mobile Navigation */}
@@ -174,7 +229,11 @@ function Header({ user }) {
                       duration-300 ease-in-out py-2 
                       text-sm uppercase tracking-wider 
                       font-medium text-center
-                      ${isActive ? "border-b-2 border-purple-300 dark:border-purple-400" : ""}
+                      ${
+                        isActive
+                          ? "border-b-2 border-purple-300 dark:border-purple-400"
+                          : ""
+                      }
                     `}
                     onClick={toggleMenu}
                   >
@@ -190,8 +249,8 @@ function Header({ user }) {
   );
 }
 
-export default Header;
-
 Header.propTypes = {
   user: PropTypes.object,
 };
+
+export default Header;
