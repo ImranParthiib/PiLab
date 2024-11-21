@@ -20,8 +20,8 @@ const PiMemorization = () => {
     const value = e.target.value;
     setInput(value);
     setCorrect(piDigits.startsWith(value));
-    if (piDigits.startsWith(value) && value.length === piDigits.length) {
-      addMark("Pi Memorization", 5); // Add 5 marks each time the game is played
+    if (piDigits.startsWith(value) && value.length % 5 === 0) {
+      addMark("Pi Memorization", 5); // Add 5 marks for every 5 correct digits
     }
   };
 
@@ -33,7 +33,7 @@ const PiMemorization = () => {
 
   const showHint = () => {
     const nextDigit = piDigits[input.length];
-    setHint(`The next digit is ${nextDigit}. Try to remember it!`);
+    setHint(`The next digit is ${nextDigit}, Try to remember it!`);
   };
 
   return (
