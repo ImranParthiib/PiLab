@@ -1,61 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { MarksContext } from "../context/MarksContext";
 
 const PiMemorization = () => {
-  // Store Pi digits as a string for easy access
-  const piDigits = "3.1415926535897932384626433832795028841971";
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [userInput, setUserInput] = useState("");
-  const [score, setScore] = useState(0);
-  const [feedback, setFeedback] = useState("");
+  const piDigits = "3.14159265358979323846264338327950288419716939937510";
+  const [input, setInput] = useState("");
+  const [correct, setCorrect] = useState(true);
+  const { marks, addMark } = useContext(MarksContext);
+  const [currentMark, setCurrentMark] = useState(0);
+  const [hint, setHint] = useState("");
 
-  // Handle user input change
-  const handleInputChange = (e) => {
-    setUserInput(e.target.value);
+  useEffect(() => {
+    const mark = marks.find((mark) => mark.game === "Pi Memorization");
+    if (mark) {
+      setCurrentMark(mark.score);
+    }
+  }, [marks]);
 
-    // Check if input matches the next digit
-    if (e.target.value === piDigits[currentIndex]) {
-      setFeedback("Correct!");
-      setScore(score + 1);
-      setCurrentIndex(currentIndex + 1);
-      setUserInput(""); // Reset input
-    } else if (e.target.value.length > 0) {
-      setFeedback("Try Again!");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInput(value);
+    setCorrect(piDigits.startsWith(value));
+    if (piDigits.startsWith(value) && value.length === piDigits.length) {
+      addMark("Pi Memorization", 5); // Add 5 marks each time the game is played
     }
   };
 
+  const reset = () => {
+    setInput("");
+    setCorrect(true);
+    setHint("");
+  };
+
+  const showHint = () => {
+    const nextDigit = piDigits[input.length];
+    setHint(`The next digit is ${nextDigit}. Try to remember it!`);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-50 flex flex-col items-center justify-center p-4">
-      <h1 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+    <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold text-white mb-8">
         Pi Memorization Tool
       </h1>
-      <p className="text-lg mb-4">
-        Memorize the digits of Pi. Current Digit:{" "}
-        <span className="font-mono text-yellow-400">
-          {piDigits.slice(0, currentIndex + 1)}
-        </span>
-      </p>
-      <input
-        type="text"
-        value={userInput}
-        onChange={handleInputChange}
-        className="px-4 py-2 rounded-lg bg-gray-800 text-gray-50 focus:outline-none border border-gray-600"
-        maxLength={1}
-        autoFocus
-      />
-      <p className="mt-4 text-xl">
-        {feedback && (
-          <span
-            className={
-              feedback === "Correct!" ? "text-green-400" : "text-red-400"
-            }
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Enter digits of Pi:
+        </label>
+        <input
+          type="text"
+          value={input}
+          onChange={handleChange}
+          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+            correct ? "border-green-500" : "border-red-500"
+          }`}
+        />
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={showHint}
+            className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            {feedback}
-          </span>
-        )}
-      </p>
-      <p className="mt-4 text-lg">
-        Score: <span className="font-bold text-blue-400">{score}</span>
-      </p>
+            Hint
+          </button>
+          <button
+            onClick={reset}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Reset
+          </button>
+        </div>
+        {hint && <p className="text-gray-700 mt-4">{hint}</p>}
+        <p className="text-gray-700 mt-4">
+          {correct ? "Keep going!" : "Incorrect, try again!"}
+        </p>
+        <h3 className="text-xl font-bold text-gray-700 mt-4">
+          Current Mark: {currentMark}
+        </h3>
+      </div>
     </div>
   );
 };

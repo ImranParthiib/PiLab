@@ -1,43 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { MarksContext } from "../context/MarksContext";
 
 const PiCalculator = () => {
   const [iterations, setIterations] = useState(1000);
   const [piEstimate, setPiEstimate] = useState(null);
-  const [running, setRunning] = useState(false);
-  const [currentIteration, setCurrentIteration] = useState(0);
+  const { marks, addMark } = useContext(MarksContext);
+  const [currentMark, setCurrentMark] = useState(0);
 
   useEffect(() => {
-    let interval;
-    if (running) {
-      interval = setInterval(() => {
-        calculatePi(currentIteration);
-        setCurrentIteration((prev) => prev + 1);
-      }, 10);
+    const mark = marks.find((mark) => mark.game === "Pi Calculator");
+    if (mark) {
+      setCurrentMark(mark.score);
     }
-    return () => clearInterval(interval);
-  }, [running, currentIteration]);
+  }, [marks]);
 
-  const calculatePi = (iteration) => {
-    let pi = 0;
-    for (let i = 0; i <= iteration; i++) {
-      pi += (i % 2 === 0 ? 1 : -1) / (2 * i + 1);
+  const calculatePi = () => {
+    let insideCircle = 0;
+    for (let i = 0; i < iterations; i++) {
+      const x = Math.random();
+      const y = Math.random();
+      if (x * x + y * y <= 1) {
+        insideCircle++;
+      }
     }
-    pi *= 4;
+    const pi = (insideCircle / iterations) * 4;
     setPiEstimate(pi);
-  };
-
-  const startCalculation = () => {
-    setRunning(true);
-  };
-
-  const stopCalculation = () => {
-    setRunning(false);
-  };
-
-  const reset = () => {
-    setRunning(false);
-    setPiEstimate(null);
-    setCurrentIteration(0);
+    addMark("Pi Calculator", 5); // Add 5 marks each time the game is played
   };
 
   return (
@@ -56,38 +44,20 @@ const PiCalculator = () => {
         />
         <div className="flex justify-between mt-4">
           <button
-            onClick={startCalculation}
+            onClick={calculatePi}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Start
-          </button>
-          <button
-            onClick={stopCalculation}
-            className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Stop
-          </button>
-          <button
-            onClick={reset}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Reset
+            Calculate Pi
           </button>
         </div>
         {piEstimate && (
           <h2 className="text-2xl font-bold text-gray-700 mt-4">
-            Estimated Pi: {piEstimate.toFixed(6)}
+            Estimated Pi: {piEstimate}
           </h2>
         )}
-      </div>
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mt-8">
-        <h2 className="text-2xl font-bold text-gray-700 mb-4">How It Works</h2>
-        <p className="text-gray-700">
-          This Pi calculator uses the Leibniz formula to estimate the value of Pi. The formula is:
-          <br />
-          <code className="block mt-2 mb-2 text-center">π = 4 * (1 - 1/3 + 1/5 - 1/7 + 1/9 - ...)</code>
-          The method involves summing a series of fractions with alternating signs. The more iterations you perform, the closer the estimate will be to the actual value of Pi.
-        </p>
+        <h3 className="text-xl font-bold text-gray-700 mt-4">
+          Current Mark: {currentMark}
+        </h3>
       </div>
     </div>
   );

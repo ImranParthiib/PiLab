@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ import NotFound from "./components/NotFound";
 import GoogleSignIn from "./components/GoogleSignIn";
 import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { MarksProvider } from "./context/MarksContext";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,29 +30,34 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <Header user={user} />
-      {user ? (
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/pi-calculator" element={<PiCalculator />} />
-            <Route path="/pi-memorization" element={<PiMemorization />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/visual-demonstrations" element={<VisualDemonstrations />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <BackToTopButton />
-        </main>
-      ) : (
-        <GoogleSignIn />
-      )}
-      <Footer />
-    </div>
+    <MarksProvider>
+      <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+        <Header user={user} />
+        {user ? (
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pi-calculator" element={<PiCalculator />} />
+              <Route path="/pi-memorization" element={<PiMemorization />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/visual-demonstrations"
+                element={<VisualDemonstrations />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <BackToTopButton />
+          </main>
+        ) : (
+          <GoogleSignIn />
+        )}
+        <Footer />
+      </div>
+    </MarksProvider>
   );
 }
 

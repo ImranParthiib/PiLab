@@ -1,59 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { auth } from "../../Firebase/firebaseConfig";
+import { MarksContext } from "../context/MarksContext";
 
 function Dashboard() {
-  const [user, setUser] = useState(null);
-  const [marks, setMarks] = useState([]);
-
-  useEffect(() => {
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      setUser(currentUser);
-      // Mock data for user marks from Pi games
-      setMarks([
-        { game: "Pi Calculator", score: 95 },
-        { game: "Pi Memorization", score: 88 },
-        { game: "Visual Demonstrations", score: 92 },
-      ]);
-    }
-  }, []);
+  const { marks } = useContext(MarksContext);
+  const user = auth.currentUser;
 
   return (
-    <div className="container mx-auto p-4 bg-slate-900">
-      <h1 className="text-3xl font-bold text-center text-white  mb-4">Dashboard</h1>
+    <div className="container mx-auto p-4 bg-slate-900 min-h-screen">
+      <h1 className="text-4xl font-bold text-center text-white mb-8">
+        Dashboard
+      </h1>
       {user ? (
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <div className="flex items-center space-x-4 mb-6">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-6 mb-8">
             <img
               src={user.photoURL}
               alt={user.displayName}
-              className="w-16 h-16 rounded-full border-2 border-gray-300"
+              className="w-20 h-20 rounded-full border-4 border-indigo-500 shadow-lg"
             />
             <div>
-              <h2 className="text-2xl font-semibold">{user.displayName}</h2>
+              <h2 className="text-3xl font-semibold text-gray-800">
+                {user.displayName}
+              </h2>
               <p className="text-gray-600">{user.email}</p>
             </div>
           </div>
-          <h3 className="text-xl font-semibold mb-4">Your Pi Game Scores</h3>
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border-b">Game</th>
-                <th className="py-2 px-4 border-b">Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {marks.map((mark, index) => (
-                <tr key={index}>
-                  <td className="py-2 px-4 border-b">{mark.game}</td>
-                  <td className="py-2 px-4 border-b">{mark.score}</td>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+            Your Pi Game Scores
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-lg">
+              <thead>
+                <tr className="bg-indigo-500 text-white">
+                  <th className="py-3 px-6 text-left">Game</th>
+                  <th className="py-3 px-6 text-left">Score</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {marks.map((mark, index) => (
+                  <tr
+                    key={index}
+                    className="border-b hover:bg-gray-100 transition duration-300"
+                  >
+                    <td className="py-3 px-6">{mark.game}</td>
+                    <td className="py-3 px-6">{mark.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <div className="flex justify-center items-center h-full">
+          <p className="text-white text-xl">Loading...</p>
+        </div>
       )}
     </div>
   );
